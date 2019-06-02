@@ -44,7 +44,6 @@ ext {
                 "picasso"                  : "com.squareup.picasso:picasso:2.5.2",
 
                 //view
-                "autolayout"               : "com.zhy:autolayout:1.4.5",
                 "butterknife"              : "com.jakewharton:butterknife:${version["butterknifeSdkVersion"]}",
                 "butterknife-compiler"     : "com.jakewharton:butterknife-compiler:${version["butterknifeSdkVersion"]}",
                 "pickerview"               : "com.contrarywind:Android-PickerView:3.2.5",
@@ -53,7 +52,7 @@ ext {
                 "nineoldandroids"          : "com.nineoldandroids:library:2.4.0",
                 "paginate"                 : "com.github.markomilos:paginate:0.5.1",
                 "vlayout"                  : "com.alibaba.android:vlayout:1.1.0@aar",
-                "autosize"                 : "me.jessyan:autosize:1.1.1",
+                "autosize"                 : "me.jessyan:autosize:1.1.2",
 
                 //rx1
                 "rxandroid"                : "io.reactivex:rxandroid:1.2.1",
@@ -63,7 +62,6 @@ ext {
                 "rxcache"                  : "com.github.VictorAlbertos.RxCache:runtime:1.7.0-1.x",
                 "rxcache-jolyglot-gson"    : "com.github.VictorAlbertos.Jolyglot:gson:0.0.4",
                 "rxbinding-recyclerview-v7": "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:1.0.1",
-                "rxpermissions"            : "com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar",
                 "rxerrorhandler"           : "me.jessyan:rxerrorhandler:1.0.1",
 
                 //rx2
@@ -73,7 +71,6 @@ ext {
                 "rxlifecycle2-android"     : "com.trello.rxlifecycle2:rxlifecycle-android:${version["rxlifecycle2SdkVersion"]}",
                 "rxlifecycle2-components"  : "com.trello.rxlifecycle2:rxlifecycle-components:${version["rxlifecycle2SdkVersion"]}",
                 "rxcache2"                 : "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x",
-                "rxpermissions2"           : "com.github.tbruyelle:rxpermissions:0.10.2",
                 "rxerrorhandler2"          : "me.jessyan:rxerrorhandler:2.1.1",
 
                 //tools

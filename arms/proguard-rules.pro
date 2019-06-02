@@ -221,10 +221,6 @@
 -keep interface com.trello.rxlifecycle2.** { *; }
 
 
-################RxPermissions#################
--keep class com.tbruyelle.rxpermissions2.** { *; }
--keep interface com.tbruyelle.rxpermissions2.** { *; }
-
 ################RxCache#################
 -dontwarn io.rx_cache2.internal.**
 -keep class io.rx_cache2.internal.Record { *; }

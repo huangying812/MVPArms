@@ -62,7 +62,6 @@
 5. [`Rxlifecycle`，在 Android 上使用 `RxJava` 都知道的一个坑，就是生命周期的解除订阅，这个框架通过绑定 Activity 和 Fragment 的生命周期完美解决该问题.](https://github.com/trello/RxLifecycle)
 6. [`RxCache` 是使用注解，为 `Retrofit` 加入二级缓存 (内存，磁盘) 的缓存库.](https://github.com/VictorAlbertos/RxCache)
 7. [`RxErroHandler` 是 `RxJava` 的错误处理库，可在出现错误后重试.](https://github.com/JessYanCoding/RxErrorHandler)
-8. [`RxPermissions` 用于处理 Android 运行时权限的响应式库.](https://github.com/tbruyelle/RxPermissions)
 9. [`Retrofit` 是 Square 出品的网络请求库，极大的减少了 Http 请求的代码和步骤.](https://github.com/square/retrofit)
 10. [`Okhttp` 同样 Square 出品，不多介绍，做 Android 的都应该知道.](https://github.com/square/okhttp)
 11. [`AndroidAutoSize` 是今日头条屏幕适配方案终极版，一个极低成本的 Android 屏幕适配方案，该库没有引入到 `Arms`，所以框架使用者可自由选择屏幕适配方案.](https://github.com/JessYanCoding/AndroidAutoSize)

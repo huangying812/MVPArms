@@ -67,7 +67,6 @@
 4. [`RxAndroid`](https://github.com/ReactiveX/RxAndroid)
 5. [`Rxlifecycle`](https://github.com/trello/RxLifecycle)
 6. [`RxCache`](https://github.com/VictorAlbertos/RxCache)
-7. [`RxPermissions`](https://github.com/tbruyelle/RxPermissions)
 8. [`RxErroHandler`](https://github.com/JessYanCoding/RxErrorHandler)
 9. [`Retrofit`](https://github.com/square/retrofit)
 10. [`Okhttp`](https://github.com/square/okhttp)
