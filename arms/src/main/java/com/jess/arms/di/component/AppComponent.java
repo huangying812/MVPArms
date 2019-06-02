@@ -15,9 +15,9 @@
  */
 package com.jess.arms.di.component;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+
 import com.google.gson.Gson;
 import com.jess.arms.base.delegate.AppDelegate;
 import com.jess.arms.di.module.AppModule;
@@ -25,16 +25,18 @@ import com.jess.arms.di.module.ClientModule;
 import com.jess.arms.di.module.GlobalConfigModule;
 import com.jess.arms.http.imageloader.BaseImageLoaderStrategy;
 import com.jess.arms.http.imageloader.ImageLoader;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.integration.ConfigModule;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.utils.ArmsUtils;
-import dagger.BindsInstance;
-import dagger.Component;
+
 import java.io.File;
 import java.util.concurrent.ExecutorService;
+
 import javax.inject.Singleton;
+
+import dagger.BindsInstance;
+import dagger.Component;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import okhttp3.OkHttpClient;
 
@@ -53,18 +55,6 @@ import okhttp3.OkHttpClient;
 @Component(modules = {AppModule.class, ClientModule.class, GlobalConfigModule.class})
 public interface AppComponent {
     Application application();
-
-    /**
-     * 用于管理所有 {@link Activity}
-     * 之前 {@link AppManager} 使用 Dagger 保证单例, 只能使用 {@link AppComponent#appManager()} 访问
-     * 现在直接将 AppManager 独立为单例类, 可以直接通过静态方法 {@link AppManager#getAppManager()} 访问, 更加方便
-     * 但为了不影响之前使用 {@link AppComponent#appManager()} 获取 {@link AppManager} 的项目, 所以暂时保留这种访问方式
-     *
-     * @return {@link AppManager}
-     * @deprecated Use {@link AppManager#getAppManager()} instead
-     */
-    @Deprecated
-    AppManager appManager();
 
     /**
      * 用于管理网络请求层, 以及数据缓存层

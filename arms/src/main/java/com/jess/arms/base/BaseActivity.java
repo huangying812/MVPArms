@@ -16,15 +16,12 @@
 package com.jess.arms.base;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.view.InflateException;
-import android.view.View;
 
 import com.jess.arms.base.delegate.IActivity;
 import com.jess.arms.integration.cache.Cache;
@@ -36,12 +33,8 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
-
-import static com.jess.arms.utils.ThirdViewUtil.convertAutoView;
 
 /**
  * ================================================
@@ -61,7 +54,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<ActivityEvent> mLifecycleSubject = BehaviorSubject.create();
     private Cache<String, Object> mCache;
-    private Unbinder mUnbinder;
     @Inject
     @Nullable
     protected P mPresenter;//如果当前页面逻辑简单, Presenter 可以为 null
@@ -82,12 +74,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     }
 
     @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
-        View view = convertAutoView(name, context, attrs);
-        return view == null ? super.onCreateView(name, context, attrs) : view;
-    }
-
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
@@ -95,8 +81,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
             //如果initView返回0,框架则不会调用setContentView(),当然也不会 Bind ButterKnife
             if (layoutResID != 0) {
                 setContentView(layoutResID);
-                //绑定到butterknife
-                mUnbinder = ButterKnife.bind(this);
             }
         } catch (Exception e) {
             if (e instanceof InflateException) throw e;
@@ -108,9 +92,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY)
-            mUnbinder.unbind();
-        this.mUnbinder = null;
         if (mPresenter != null)
             mPresenter.onDestroy();//释放资源
         this.mPresenter = null;

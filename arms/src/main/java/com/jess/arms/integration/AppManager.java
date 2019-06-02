@@ -19,14 +19,11 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.utils.ArmsUtils;
 
 import java.util.Arrays;
@@ -67,12 +64,6 @@ public final class AppManager {
      * 当前在前台的 Activity
      */
     private Activity mCurrentActivity;
-    /**
-     * 此方法作废, 现在可通过 {@link AppManager#getAppManager()} 直接访问 {@link AppManager}
-     * <p>
-     * 提供给外部扩展 {@link AppManager} 的 {@link #onReceive(Message)} 方法
-     */
-    private HandleListener mHandleListener;
 
     private AppManager() {
     }
@@ -91,51 +82,6 @@ public final class AppManager {
     public AppManager init(Application application) {
         this.mApplication = application;
         return sAppManager;
-    }
-
-    /**
-     * 此方法作废, 现在可通过 {@link AppManager#getAppManager()} 直接访问 {@link AppManager}
-     * <p>
-     * 可通过 {@link #setHandleListener(HandleListener)}, 让外部可扩展新的事件
-     *
-     * @param message
-     */
-    @Deprecated
-    public void onReceive(Message message) {
-        if (mHandleListener != null) {
-            mHandleListener.handleMessage(this, message);
-        }
-    }
-
-    @Deprecated
-    public HandleListener getHandleListener() {
-        return mHandleListener;
-    }
-
-    /**
-     * 此方法作废, 现在可通过 {@link AppManager#getAppManager()} 直接访问 {@link AppManager}
-     * <p>
-     * 提供给外部扩展 {@link AppManager} 的 {@link #onReceive} 方法(远程遥控 {@link AppManager} 的功能)
-     * 建议在 {@link ConfigModule#injectAppLifecycle(Context, List)} 中
-     * 通过 {@link AppLifecycles#onCreate(Application)} 在 App 初始化时,使用此方法传入自定义的 {@link HandleListener}
-     *
-     * @param handleListener
-     */
-    @Deprecated
-    public void setHandleListener(HandleListener handleListener) {
-        this.mHandleListener = handleListener;
-    }
-
-    /**
-     * 此方法作废, 现在可通过 {@link AppManager#getAppManager()} 直接访问 {@link AppManager}
-     * <p>
-     * 通过此方法远程遥控 {@link AppManager}, 使 {@link #onReceive(Message)} 执行对应方法
-     *
-     * @param msg {@link Message}
-     */
-    @Deprecated
-    public static void post(Message msg) {
-        getAppManager().onReceive(msg);
     }
 
     /**
@@ -198,7 +144,6 @@ public final class AppManager {
      */
     public void release() {
         mActivityList.clear();
-        mHandleListener = null;
         mActivityList = null;
         mCurrentActivity = null;
         mApplication = null;
@@ -462,8 +407,4 @@ public final class AppManager {
         }
     }
 
-    @Deprecated
-    public interface HandleListener {
-        void handleMessage(AppManager appManager, Message message);
-    }
 }

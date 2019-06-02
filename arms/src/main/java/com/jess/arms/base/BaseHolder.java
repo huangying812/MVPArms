@@ -19,9 +19,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.jess.arms.utils.ThirdViewUtil;
-import com.zhy.autolayout.utils.AutoUtils;
-
 /**
  * ================================================
  * 基类 {@link RecyclerView.ViewHolder}
@@ -39,10 +36,6 @@ public abstract class BaseHolder<T> extends RecyclerView.ViewHolder implements V
         super(itemView);
         //点击事件
         itemView.setOnClickListener(this);
-        //屏幕适配
-        if (ThirdViewUtil.isUseAutolayout()) AutoUtils.autoSize(itemView);
-        //绑定 ButterKnife
-        ThirdViewUtil.bindTarget(this, itemView);
     }
 
     /**
