@@ -28,7 +28,6 @@ import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
 
-import butterknife.BindView;
 import me.jessyan.mvparms.demo.R;
 import me.jessyan.mvparms.demo.mvp.model.entity.User;
 
@@ -43,9 +42,7 @@ import me.jessyan.mvparms.demo.mvp.model.entity.User;
  */
 public class UserItemHolder extends BaseHolder<User> {
 
-    @BindView(R.id.iv_avatar)
     ImageView mAvatar;
-    @BindView(R.id.tv_name)
     TextView mName;
     private AppComponent mAppComponent;
     /**
@@ -56,6 +53,8 @@ public class UserItemHolder extends BaseHolder<User> {
     public UserItemHolder(View itemView) {
         super(itemView);
         //可以在任何可以拿到 Context 的地方, 拿到 AppComponent, 从而得到用 Dagger 管理的单例对象
+        mAvatar = itemView.findViewById(R.id.iv_avatar);
+        mName = itemView.findViewById(R.id.tv_name);
         mAppComponent = ArmsUtils.obtainAppComponentFromContext(itemView.getContext());
         mImageLoader = mAppComponent.imageLoader();
     }
