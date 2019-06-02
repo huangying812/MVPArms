@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
-    useLibrary 'org.apache.http.legacy'
 
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
@@ -46,6 +47,7 @@ dependencies {
         exclude module: 'support-compat'
     }
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
     //rx
     api rootProject.ext.dependencies["rxjava2"]
     api(rootProject.ext.dependencies["rxandroid2"]) {
@@ -109,5 +111,3 @@ dependencies {
     //test
     api rootProject.ext.dependencies["timber"]
 }
-
-apply from: '../bintray.gradle'

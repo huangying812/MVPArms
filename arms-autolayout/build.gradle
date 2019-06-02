@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
         minSdkVersion rootProject.ext.android["minSdkVersion"]
@@ -37,5 +36,3 @@ dependencies {
         exclude module: 'recyclerview-v7'
     }
 }
-
-apply from: '../bintray.gradle'
