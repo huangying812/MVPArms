@@ -1,6 +1,5 @@
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
-# in /Users/jess/Library/Android/sdk/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
 # directive in build.gradle.
 #
@@ -36,10 +35,10 @@
 
 ################common###############
 
--keep public class * implements com.jess.arms.integration.ConfigModule
+-keep public class * implements ConfigModule
 
  #实体类不参与混淆
--keep class com.jess.arms.widget.** { *; } #自定义控件不参与混淆
+-keep class com.plain.widget.** { *; } #自定义控件不参与混淆
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
 }

@@ -5,7 +5,7 @@ ext {
                buildToolsVersion       : "28.0.3",
                minSdkVersion           : 21,
                targetSdkVersion        : 28,
-               appId                   : "me.jessyan.mvparms.demo",
+               appId                   : "com.mvp.demo",
                versionCode             : 180,
                versionName             : "2.5.0"
     ]

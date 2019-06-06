@@ -1,4 +1,4 @@
-package me.jessyan.mvparms.demo;
+package com.mvp.demo;
 
 import org.junit.Test;
 
