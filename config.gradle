@@ -15,11 +15,12 @@ ext {
                    retrofitSdkVersion      : "2.4.0",
                    dagger2SdkVersion       : "2.19",
                    glideSdkVersion         : "4.8.0",
-                   butterknifeSdkVersion   : "8.8.1",
+                   butterknifeSdkVersion   : "10.0.0",
                    rxlifecycleSdkVersion   : "1.0",
                    rxlifecycle2SdkVersion  : "2.2.2",
                    espressoSdkVersion      : "3.0.1",
-                   canarySdkVersion        : "1.5.4"
+                   canarySdkVersion        : "1.5.4",
+                   matisseVersion          : "0.5.2-beta4"
         ]
 
     dependencies = [
@@ -103,6 +104,7 @@ ext {
                 "logger"                   : "com.orhanobut:logger:2.2.0",
                 "canary-debug"             : "com.squareup.leakcanary:leakcanary-android:${version["canarySdkVersion"]}",
                 "canary-release"           : "com.squareup.leakcanary:leakcanary-android-no-op:${version["canarySdkVersion"]}",
-                "umeng-analytics"          : "com.umeng.analytics:analytics:6.0.1"
+                "umeng-analytics"          : "com.umeng.analytics:analytics:6.0.1",
+                "matisse"                  : "com.zhihu.android:matisse:${version["matisseVersion"]}"
         ]
 }

@@ -248,7 +248,7 @@
 # Marshmallow removed Notification.setLatestEventInfo()
 -dontwarn android.app.Notification
 
-
+-dontwarn com.squareup.picasso.**
 
 
 

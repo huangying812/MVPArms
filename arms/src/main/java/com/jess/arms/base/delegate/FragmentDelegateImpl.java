@@ -17,12 +17,15 @@ package com.jess.arms.base.delegate;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.jess.arms.integration.EventBusManager;
 import com.jess.arms.utils.ArmsUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * ================================================
@@ -34,11 +37,11 @@ import com.jess.arms.utils.ArmsUtils;
  * ================================================
  */
 public class FragmentDelegateImpl implements FragmentDelegate {
-    private android.support.v4.app.FragmentManager mFragmentManager;
-    private android.support.v4.app.Fragment mFragment;
+    private FragmentManager mFragmentManager;
+    private Fragment mFragment;
     private IFragment iFragment;
 
-    public FragmentDelegateImpl(@NonNull android.support.v4.app.FragmentManager fragmentManager, @NonNull android.support.v4.app.Fragment fragment) {
+    public FragmentDelegateImpl(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment) {
         this.mFragmentManager = fragmentManager;
         this.mFragment = fragment;
         this.iFragment = (IFragment) fragment;

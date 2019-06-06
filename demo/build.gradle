@@ -5,6 +5,11 @@ apply plugin: 'kotlin-kapt'
 kapt {
     generateStubs = true
 }
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -69,9 +74,6 @@ dependencies {
     implementation rootProject.ext.dependencies["lifecyclemodel"]
 
     //view
-    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
-        exclude module: 'support-annotations'
-    }
     implementation rootProject.ext.dependencies["paginate"]
 
     //arms
@@ -85,13 +87,10 @@ dependencies {
     //所以旧项目只要依赖 arms-autolayout 即可兼容之前的旧页面, 新页面可以使用 AndroidAutoSize 进行适配, 等有时间了再将旧页面全部替换为 AndroidAutoSize
     implementation rootProject.ext.dependencies["autosize"]
 
-    //Arms 核心库不再包含 Glide, 想使用其他图片加载框架或者想自行扩展 ImageLoaderStrategy 就不要依赖 arms-imageloader-glide
-    //依赖 arms-imageloader-glide 后还需要在 GlobalConfiguration 中手动注册 GlideImageLoaderStrategy
-    implementation 'me.jessyan:arms-imageloader-glide:2.5.0'
-
     //test
     testImplementation rootProject.ext.dependencies["junit"]
     debugImplementation rootProject.ext.dependencies["canary-debug"]
     releaseImplementation rootProject.ext.dependencies["canary-release"]
     testImplementation rootProject.ext.dependencies["canary-release"]
+    compile project(path: ':arms-imageloader-glide')
 }

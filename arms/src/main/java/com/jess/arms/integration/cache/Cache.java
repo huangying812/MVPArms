@@ -16,12 +16,13 @@
 package com.jess.arms.integration.cache;
 
 import android.app.Application;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.jess.arms.di.module.GlobalConfigModule;
 
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 
 /**

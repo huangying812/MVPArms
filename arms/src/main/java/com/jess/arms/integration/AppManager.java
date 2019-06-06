@@ -20,10 +20,9 @@ import android.app.Application;
 import android.app.Dialog;
 import android.app.Service;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.jess.arms.utils.ArmsUtils;
 
 import java.util.Arrays;
@@ -31,6 +30,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;

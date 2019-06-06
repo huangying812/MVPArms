@@ -16,7 +16,6 @@
 package com.jess.arms.http.imageloader.glide;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
@@ -32,11 +31,13 @@ import com.bumptech.glide.module.AppGlideModule;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.OkHttpUrlLoader;
 import com.jess.arms.http.imageloader.BaseImageLoaderStrategy;
-import com.jess.arms.utils.DataHelper;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 
 import java.io.File;
 import java.io.InputStream;
+
+import androidx.annotation.NonNull;
 
 /**
  * ================================================

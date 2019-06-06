@@ -16,12 +16,13 @@
 package com.jess.arms.http.imageloader;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 
 import com.jess.arms.utils.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import androidx.annotation.Nullable;
 
 /**
  * ================================================

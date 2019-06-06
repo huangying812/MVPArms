@@ -2,10 +2,18 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+kapt {
+    generateStubs = true
+}
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -27,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //support
     api(rootProject.ext.dependencies["support-v4"]) {
         exclude module: 'support-annotations'
@@ -40,7 +49,7 @@ dependencies {
     }
     api rootProject.ext.dependencies["annotations"]
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
     //rx
     api rootProject.ext.dependencies["rxjava2"]
     api(rootProject.ext.dependencies["rxandroid2"]) {
@@ -84,15 +93,40 @@ dependencies {
         exclude module: 'okio'
     }
     api rootProject.ext.dependencies["okhttp3"]
+    api rootProject.ext.dependencies["matisse"]
+    api 'com.google.zxing:android-core:3.3.0'
+    api 'com.google.zxing:core:3.3.3'
     compileOnly rootProject.ext.dependencies["glide"]
-    annotationProcessor(rootProject.ext.dependencies["glide-compiler"]) {
+    kapt(rootProject.ext.dependencies["glide-compiler"]) {
         exclude module: 'jsr305'
     }
+    api "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}"
+    //anko
+    api "androidx.core:core-ktx:${ktxVersion}@aar"
+    api "org.jetbrains.anko:anko-commons:$ankoVersion"
+    api "org.jetbrains.anko:anko-design:$ankoVersion"
+    api "org.jetbrains.anko:anko-design-listeners:$ankoVersion"
+    api "org.jetbrains.anko:anko-design:$ankoVersion"
+
+    // For SnackBars
+    api "org.jetbrains.anko:anko-appcompat-v7-listeners:$ankoVersion"
+    api "org.jetbrains.anko:anko-${ankoSdkVersion}-listeners:$ankoVersion"
+    api "org.jetbrains.anko:anko-${ankoSdkVersion}:$ankoVersion"
+    api("org.jetbrains.anko:anko-coroutines:$ankoVersion") {
+        exclude group: "org.jetbrains.kotlinx"
+    }
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
+    api "com.github.kirtan403.k4kotlin:k4kotlin:$k4kotlinVersion"
+
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //https://github.com/enbandari/ObjectPropertyDelegate
+    api "com.bennyhuo.kotlin:opd:1.0-rc-2"
 
     //tools
     compileOnly rootProject.ext.dependencies["javax.annotation"]
     api rootProject.ext.dependencies["dagger2"]
-    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+    kapt rootProject.ext.dependencies["dagger2-compiler"]
     compileOnly rootProject.ext.dependencies["androideventbus"]
     compileOnly rootProject.ext.dependencies["eventbus"]
     api rootProject.ext.dependencies["gson"]

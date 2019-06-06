@@ -16,10 +16,9 @@
 package me.jessyan.mvparms.demo.mvp.presenter
 
 import android.app.Application
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.OnLifecycleEvent
-import android.support.v4.app.Fragment
-import android.support.v4.app.SupportActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.OnLifecycleEvent
 import com.jess.arms.di.scope.ActivityScope
 import com.jess.arms.integration.AppManager
 import com.jess.arms.mvp.BasePresenter
@@ -109,7 +108,7 @@ constructor(model: UserContract.Model, rootView: UserContract.View)
         mModel.getUsers(lastUserId, isEvictCache)
                 .subscribeOn(Schedulers.io())
                 .retryWhen(RetryWithDelay(3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
-                .doOnSubscribe { disposable ->
+                .doOnSubscribe {
                     if (pullToRefresh)
                         mRootView.showLoading()//显示下拉刷新的进度条
                     else
