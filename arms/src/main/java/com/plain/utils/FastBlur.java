@@ -20,8 +20,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.view.View;
+
+import timber.log.Timber;
 
 /**
  * ================================================
@@ -295,7 +296,7 @@ public class FastBlur {
         canvas.drawBitmap(bkg, 0, 0, paint);
         overlay = FastBlur.doBlur(overlay, (int) radius, true);
         view.setBackgroundDrawable(new BitmapDrawable(context.getResources(), overlay));
-        Log.w("test", "cost " + (System.currentTimeMillis() - startMs) + "ms");
+        Timber.tag("test").w("cost " + (System.currentTimeMillis() - startMs) + "ms");
     }
 
     /**
@@ -320,7 +321,7 @@ public class FastBlur {
         paint.setFlags(Paint.FILTER_BITMAP_FLAG);
         canvas.drawBitmap(bkg, 0, 0, paint);
         overlay = FastBlur.doBlur(overlay, (int) radius, true);
-        Log.w("test", "cost " + (System.currentTimeMillis() - startMs) + "ms");
+        Timber.tag("test").w("cost " + (System.currentTimeMillis() - startMs) + "ms");
         return overlay;
     }
 }

@@ -36,7 +36,6 @@ import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -47,6 +46,8 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.text.NumberFormat;
 import java.util.List;
+
+import timber.log.Timber;
 
 /**
  * ================================================
@@ -300,7 +301,7 @@ public class DeviceUtils {
             if (pckInfo != null)
                 return true;
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e("TDvice", e.getMessage());
+            Timber.tag("TDvice").e(e.getMessage());
         }
         return false;
     }

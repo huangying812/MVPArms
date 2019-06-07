@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MVPArms</string>
+    <string name="placeholder_online_consultation_qq">mqqwpa://im/chat?chat_type=wpa&#038;uin=%s</string>
+    <string name="placeholder_online_consultation_qqweb">http://wpa.qq.com/msgrd?v=3&#038;uin=%s&#038;site=qq&#038;menu=yes</string>
+    <string name="placeholder_title_customer_qq">咨询客服(qq:%s)</string>
+    <string name="qq_client_inavailable">QQ 版本过低或者没有安装，需要升级或安装QQ才能使用！</string>
+
+</resources>

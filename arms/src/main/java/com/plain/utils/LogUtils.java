@@ -16,7 +16,8 @@
 package com.plain.utils;
 
 import android.text.TextUtils;
-import android.util.Log;
+
+import timber.log.Timber;
 
 /**
  * ================================================
@@ -43,7 +44,7 @@ public class LogUtils {
 
     public static void debugInfo(String tag, String msg) {
         if (!isLog || TextUtils.isEmpty(msg)) return;
-        Log.d(tag, msg);
+        Timber.tag(tag).d(msg);
 
     }
 
@@ -53,7 +54,7 @@ public class LogUtils {
 
     public static void warnInfo(String tag, String msg) {
         if (!isLog || TextUtils.isEmpty(msg)) return;
-        Log.w(tag, msg);
+        Timber.tag(tag).w(msg);
 
     }
 
@@ -81,7 +82,7 @@ public class LogUtils {
             }
 
             index += maxLength;
-            Log.d(tag, sub.trim());
+            Timber.tag(tag).d(sub.trim());
         }
     }
 

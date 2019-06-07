@@ -15,9 +15,6 @@
  */
 package com.plain.http;
 
-import androidx.annotation.NonNull;
-import android.util.Log;
-
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.HttpException;
@@ -30,10 +27,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import timber.log.Timber;
 
 /**
  * Fetches an {@link InputStream} using the okhttp library.
@@ -73,10 +72,7 @@ public class OkHttpStreamFetcher implements DataFetcher<InputStream>, okhttp3.Ca
 
     @Override
     public void onFailure(@NonNull Call call, @NonNull IOException e) {
-        if (Log.isLoggable(TAG, Log.DEBUG)) {
-            Log.d(TAG, "OkHttp failed to obtain result", e);
-        }
-
+        Timber.tag(TAG).d(e, "OkHttp failed to obtain result");
         callback.onLoadFailed(e);
     }
 

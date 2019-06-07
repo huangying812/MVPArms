@@ -15,16 +15,16 @@
  */
 package com.plain.http.log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.plain.di.module.GlobalConfigModule;
 import com.plain.utils.CharacterHandler;
 import com.plain.utils.LogUtils;
-import com.plain.di.module.GlobalConfigModule;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import okhttp3.MediaType;
 import okhttp3.Request;
 
@@ -38,7 +38,7 @@ import okhttp3.Request;
  * ================================================
  */
 public class DefaultFormatPrinter implements FormatPrinter {
-    private static final String TAG = "ArmsHttpLog";
+    private static final String TAG = "Http";
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private static final String DOUBLE_SEPARATOR = LINE_SEPARATOR + LINE_SEPARATOR;
 
@@ -265,9 +265,9 @@ public class DefaultFormatPrinter implements FormatPrinter {
 
     private static String getTag(boolean isRequest) {
         if (isRequest) {
-            return TAG + "-Request";
+            return TAG + "-Req";
         } else {
-            return TAG + "-Response";
+            return TAG + "-Resp";
         }
     }
 }
