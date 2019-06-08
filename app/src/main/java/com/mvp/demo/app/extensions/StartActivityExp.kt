@@ -4,8 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.plain.permission.Permission
+import com.plain.permission.PermissionUtil
+import com.plain.permission.getPermissionSettingPageIntent
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.support.v4.intentFor
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 
 /**
@@ -40,3 +45,33 @@ inline fun <reified F : FragmentActivity> Fragment.startActivityForResult(
         noinline callback: (Intent) -> Unit = {}): LambdaHolder<Intent> {
     return requireActivity().startActivityForResult(intentFor<F>(*params), options, callback)
 }
+
+suspend fun FragmentActivity.reqMediaPermission() = reqAppPermissions(Permission.NAME_PAIR_READ_EXTERNAL_STORAGE)
+
+suspend fun FragmentActivity.reqAppPermissions(vararg permissions: Pair<String, String>) = suspendCoroutine<Boolean> { continuation ->
+
+    val permission = Array(permissions.size) { "" }
+    val permissionName = Array(permissions.size) { "" }
+    permissions.forEachIndexed { index, pair ->
+        permission[index] = (pair.first)
+        permissionName[index] = (pair.second)
+    }
+    val activity = this
+    reqPermissions(*permission) {
+        continuation.resume(true)
+    }.setOnDeniedCallback {
+        launchUI {
+            if (PermissionUtil.somePermissionPermanentlyDenied(activity, *permission)
+                    && confirmSusp("需要权限", "-${permissionName.joinToString("\n-")}\n请同意", "去权限设置页面")) {
+                startActivityForResult(getPermissionSettingPageIntent()) {
+                    continuation.resume(PermissionUtil.hasPermissions(activity, *permission))
+                }.setOnCanceledCallback {
+                    continuation.resume(PermissionUtil.hasPermissions(activity, *permission))
+                }
+            } else {
+                continuation.resume(false)
+            }
+        }
+    }
+}
+

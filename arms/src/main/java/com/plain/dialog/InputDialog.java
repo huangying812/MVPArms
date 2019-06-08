@@ -2,6 +2,9 @@ package com.plain.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Range;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -12,6 +15,11 @@ import com.plain.R;
 import com.plain.base.BaseDialog;
 import com.plain.base.BaseDialogFragment;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.math.BigDecimal;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 /**
@@ -80,6 +88,55 @@ public final class InputDialog {
 
         public Builder setContent(int resId) {
             return setContent(getText(resId));
+        }
+
+        @NotNull
+        public Builder setInputType(int inputType) {
+            mInputView.setInputType(inputType);
+            return this;
+        }
+
+        @NotNull
+        public Builder setMaxEms(int maxEms) {
+            mInputView.setMaxEms(maxEms);
+            return this;
+        }
+
+        @NotNull
+        public Builder setValueRange(@Nullable Range<BigDecimal> valueRange) {
+            if (valueRange != null) {
+                mInputView.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        try {
+                            BigDecimal value = new BigDecimal(s.toString());
+                            if (!valueRange.contains(value)) {
+                                s.clear();
+                                BigDecimal lower = valueRange.getLower();
+                                if (lower.compareTo(value) > 0) {
+                                    s.append(lower.toPlainString());
+                                } else {
+                                    BigDecimal upper = valueRange.getUpper();
+                                    s.append(upper.toPlainString());
+                                }
+                            }
+                        } catch (Exception e) {
+//                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+            return this;
         }
 
         public Builder setContent(CharSequence text) {

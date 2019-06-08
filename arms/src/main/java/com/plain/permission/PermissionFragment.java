@@ -159,7 +159,7 @@ public final class PermissionFragment extends Fragment implements Runnable {
             }
 
             // 代表申请的权限中有不同意授予的，如果有某个权限被永久拒绝就返回true给开发人员，让开发者引导用户去设置界面开启权限
-            call.noPermission(failPermissions, PermissionUtil.checkMorePermissionPermanentDenied(getActivity(), failPermissions));
+            call.noPermission(failPermissions, PermissionUtil.somePermissionPermanentlyDenied(getActivity(), failPermissions));
 
             // 证明还有一部分权限被成功授予，回调成功接口
             if (!succeedPermissions.isEmpty()) {

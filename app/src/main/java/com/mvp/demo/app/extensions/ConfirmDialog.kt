@@ -1,55 +1,84 @@
 package com.mvp.demo.app.extensions
 
-import android.content.Context
+import android.app.Dialog
+import android.util.Range
+import androidx.fragment.app.FragmentActivity
+import com.plain.dialog.InputDialog
+import com.plain.dialog.MessageDialog
+import java.math.BigDecimal
+import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 
-
-suspend fun Context.confirm(title: String, message: String = "", okBtn: String = "确定",
-                            cancelBtn: String = "取消", canceledOnTouchOutside: Boolean = false) = suspendCoroutine<Boolean> { continuation ->
-    /*BaseDialogFragment.Builder(this)
-            .setContentView(R.layout.dialog_custom)
-            .setAnimStyle(BaseDialog.AnimStyle.SCALE)
-            //.setText(id, "我是预设置的文本")
-            .setOnClickListener(R.id.btn_dialog_custom_ok, BaseDialog.OnClickListener<Any> { dialog, view -> dialog.dismiss() })
-            .addOnShowListener(BaseDialog.OnShowListener { toast("Dialog  显示了") })
-            .addOnCancelListener(BaseDialog.OnCancelListener { toast("Dialog 取消了") })
-            .addOnDismissListener(BaseDialog.OnDismissListener { toast("Dialog 销毁了") })
-            .show()*/
-   /* CommonConfirmDialog.showTwoButton(this, title, message, okBtn, cancelBtn,
-            object : TemplateDialog.ConfirmListener {
-                override fun ok() {
-                    continuation.resume(true)
-                }
-
-                override fun cancel() {
-                    continuation.resume(false)
-                }
-            }).apply {
-        setOnCancelListener {
-            continuation.resume(false)
-        }
-        setCanceledOnTouchOutside(canceledOnTouchOutside)
-    }*/
+suspend inline fun FragmentActivity.confirmSusp(title: String, message: String = "", okBtn: String = "确定",
+                                         cancelBtn: String = "取消", canceledOnTouchOutside: Boolean = false) = suspendCoroutine<Boolean> { continuation ->
+    confirm(title, message, okBtn, cancelBtn, canceledOnTouchOutside) {
+        continuation.resume(it)
+    }
 }
 
-suspend fun Context.input(title: String, defaultValue: String = "", maxInputLength: Int = Int.MAX_VALUE,
-                          inputType: Int? = null, canceledOnTouchOutside: Boolean = false) = suspendCoroutine<Pair<Boolean, String?>> { continuation ->
-    /*CommonInputDialog(this, maxInputLength, title, defaultValue, object : CommonInputDialog.ButtonListener {
-        override fun save(text: String?) {
-            continuation.resume(true to text)
-        }
+suspend fun FragmentActivity.inputSusp(title: String, hint: String = "请输入$title", defaultValue: String = "",
+                                       maxEms: Int = Int.MAX_VALUE, valueRange: Range<BigDecimal>? = null,
+                                       inputType: Int = 0, canceledOnTouchOutside: Boolean = false) = suspendCoroutine<Pair<Boolean, String?>> { continuation ->
+    input(title, hint, defaultValue, maxEms, valueRange, inputType, canceledOnTouchOutside) {
+        continuation.resume(it)
+    }
+}
 
-        override fun cancel() {
-            continuation.resume(false to "")
-        }
-    }).apply {
-        if (inputType != null) {
-            setInputType(inputType)
-        }
-        setOnCancelListener {
-            continuation.resume(false to "")
-        }
-        setCanceledOnTouchOutside(canceledOnTouchOutside)
-    }.show()*/
+fun FragmentActivity.confirm(title: String, message: String = "", okBtn: String = "确定",
+                             cancelBtn: String = "取消", canceledOnTouchOutside: Boolean = false,
+                             callback: (Boolean) -> Unit) {
+    MessageDialog.Builder(this)
+            .setTitle(title) // 标题可以不用填写
+            .setMessage(message)
+            .setConfirm(okBtn)
+            .setCancel(cancelBtn) // 设置 null 表示不显示取消按钮
+            //.setAutoDismiss(false) // 设置点击按钮后不关闭对话框
+            .setListener(object : MessageDialog.OnListener {
+
+                override fun onConfirm(dialog: Dialog) {
+                    callback(true)
+                }
+
+                override fun onCancel(dialog: Dialog) {
+                    callback(false)
+                }
+            })
+            .addOnCancelListener {
+                callback(false)
+            }
+            .show().apply {
+                setCanceledOnTouchOutside(canceledOnTouchOutside)
+            }
+}
+
+fun FragmentActivity.input(title: String, hint: String = "请输入$title", defaultValue: String = "",
+                           maxEms: Int = Int.MAX_VALUE, valueRange: Range<BigDecimal>? = null,
+                           inputType: Int = 0, canceledOnTouchOutside: Boolean = false,
+                           callback: (Pair<Boolean, String?>) -> Unit) {
+    InputDialog.Builder(this)
+            .setTitle(title) // 标题可以不用填写
+            .setContent(defaultValue)
+            .setHint(hint)
+            .setInputType(inputType)
+            .setMaxEms(maxEms)
+            .setValueRange(valueRange)
+            .setConfirm("确定")
+            .setCancel("取消") // 设置 null 表示不显示取消按钮
+            //.setAutoDismiss(false) // 设置点击按钮后不关闭对话框
+            .setListener(object : InputDialog.OnListener {
+                override fun onConfirm(dialog: Dialog?, content: String?) {
+                    callback(true to content)
+                }
+
+                override fun onCancel(dialog: Dialog) {
+                    callback(false to null)
+                }
+            })
+            .addOnCancelListener {
+                callback(false to null)
+            }
+            .show().apply {
+                setCanceledOnTouchOutside(canceledOnTouchOutside)
+            }
 }

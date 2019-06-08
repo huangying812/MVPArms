@@ -74,7 +74,7 @@ fun <F : FragmentActivity> F.startActivityForResult(
  * @param onRequestDone () -> Unit  申请成功时的回调
  * @return LambdaHolder<Unit>   可以在此对象上继续调用[#onDenied]方法来设置申请失败时的回调
  */
-fun <F : FragmentActivity> F.requestPermissions(
+fun <F : FragmentActivity> F.reqPermissions(
         vararg permission: String,
         onRequestDone: () -> Unit): LambdaHolder<Unit> {
     //获取一个与已有编码不重复的编码

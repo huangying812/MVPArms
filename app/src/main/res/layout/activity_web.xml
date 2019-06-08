@@ -7,10 +7,7 @@
     android:orientation="vertical"
     >
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_web_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <include layout="@layout/include_title"/>
 
     <ProgressBar
         android:id="@+id/pb_web_progress"

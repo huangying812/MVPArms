@@ -36,13 +36,8 @@ object PermissionUtil {
     }
 
     @JvmStatic
-    fun somePermissionPermanentlyDenied(host: Activity, deniedPermissions: List<String>): Boolean {
-        return checkMorePermissionPermanentDenied(host, deniedPermissions)
-    }
-
-    @JvmStatic
     fun somePermissionPermanentlyDenied(host: Activity, @Size(min = 1) vararg perms: String): Boolean {
-        return checkMorePermissionPermanentDenied(host, perms.toList())
+        return somePermissionPermanentlyDenied(host, perms.toList())
     }
 
     @JvmStatic
@@ -214,7 +209,7 @@ object PermissionUtil {
      * @param permissions            请求的权限
      */
     @JvmStatic
-    fun checkMorePermissionPermanentDenied(activity: Activity, permissions: List<String>): Boolean {
+    fun somePermissionPermanentlyDenied(activity: Activity, permissions: List<String>): Boolean {
         for (permission in permissions) {
             // 安装权限和浮窗权限不算，本身申请方式和危险权限申请方式不同，因为没有永久拒绝的选项，所以这里返回false
             if (permission == Permission.REQUEST_INSTALL_PACKAGES || permission == Permission.SYSTEM_ALERT_WINDOW) {
@@ -233,8 +228,7 @@ object PermissionUtil {
      * @param activity              Activity对象
      * @param permission            请求的权限
      */
-    @JvmStatic
-    fun checkSinglePermissionPermanentDenied(activity: Activity, permission: String): Boolean {
+    private fun checkSinglePermissionPermanentDenied(activity: Activity, permission: String): Boolean {
 
         //        // 安装权限和浮窗权限不算，本身申请方式和危险权限申请方式不同，因为没有永久拒绝的选项，所以这里返回false
         //        if (permission.equals(Permission.REQUEST_INSTALL_PACKAGES) || permission.equals(Permission.SYSTEM_ALERT_WINDOW)) {

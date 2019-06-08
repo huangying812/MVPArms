@@ -67,25 +67,6 @@ constructor(model: UserContract.Model, rootView: UserContract.View)
 
     fun requestUsers(pullToRefresh: Boolean) {
         requestFromModel(pullToRefresh)
-        //请求外部存储权限用于适配android6.0的权限管理机制
-        /*PermissionUtil.externalStorage(new PermissionUtil.RequestPermission() {
-            @Override
-            public void onRequestPermissionSuccess() {
-                //request permission success, do something.
-            }
-
-            @Override
-            public void onRequestPermissionFailure(List<String> permissions) {
-                mRootView.showMessage("Request permissions failure");
-                mRootView.hideLoading();//隐藏下拉刷新的进度条
-            }
-
-            @Override
-            public void onRequestPermissionFailureWithAskNeverAgain(List<String> permissions) {
-                mRootView.showMessage("Need to go to the settings");
-                mRootView.hideLoading();//隐藏下拉刷新的进度条
-            }
-        }, mRootView.getRxPermissions(), mErrorHandler);*/
     }
 
     private fun requestFromModel(pullToRefresh: Boolean) {

@@ -43,7 +43,7 @@ class WebActivity : BaseActivity<IPresenter>() {
         wv_web_view.webChromeClient = MyWebChromeClient()
 
         val url = intent?.getStringExtra(EXTR_URL).orEmpty()
-        val title = intent?.getStringExtra(EXTR_TITLE).orEmpty()
+        title = intent?.getStringExtra(EXTR_TITLE).orEmpty()
         wv_web_view.loadUrl(url)
     }
 
@@ -70,11 +70,7 @@ class WebActivity : BaseActivity<IPresenter>() {
         }
 
         // 加快HTML网页加载完成的速度，等页面finish再加载图片
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            settings.loadsImagesAutomatically = true
-        } else {
-            settings.loadsImagesAutomatically = false
-        }
+        settings.loadsImagesAutomatically = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
@@ -104,12 +100,12 @@ class WebActivity : BaseActivity<IPresenter>() {
     private inner class MyWebViewClient : WebViewClient() {
 
         // 网页加载错误时回调，这个方法会在 onPageFinished 之前调用
-        override fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
+        override fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String?) {
             showError()
         }
 
         // 开始加载网页
-        override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
+        override fun onPageStarted(view: WebView, url: String?, favicon: Bitmap?) {
             pb_web_progress.visibility = View.VISIBLE
         }
 

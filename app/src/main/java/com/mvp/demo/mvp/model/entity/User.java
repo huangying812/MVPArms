@@ -26,11 +26,13 @@ public class User {
     private final int id;
     private final String login;
     private final String avatar_url;
+    private final String html_url;
 
-    public User(int id, String login, String avatar_url) {
+    public User(int id, String login, String avatar_url, String html_url) {
         this.id = id;
         this.login = login;
         this.avatar_url = avatar_url;
+        this.html_url = html_url;
     }
 
     public String getAvatarUrl() {
@@ -38,6 +40,9 @@ public class User {
         return avatar_url.split("\\?")[0];
     }
 
+    public String getHomePage() {
+        return html_url;
+    }
 
     public int getId() {
         return id;

@@ -16,14 +16,15 @@
 package com.mvp.demo.mvp.ui.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mvp.demo.R;
-import com.mvp.demo.app.extensions.FuntionsKt;
-import com.mvp.demo.app.utils.MediaSelector;
+import com.mvp.demo.app.utils.IntentUtil;
 import com.mvp.demo.mvp.model.entity.User;
+import com.mvp.demo.mvp.ui.activity.WebActivity;
 import com.plain.base.BaseHolder;
 import com.plain.base.DefaultAdapter;
 import com.plain.di.component.AppComponent;
@@ -31,10 +32,7 @@ import com.plain.glide.ImageConfigImpl;
 import com.plain.http.imageloader.ImageLoader;
 import com.plain.utils.ArmsUtils;
 
-import org.jetbrains.anko.ToastsKt;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -76,10 +74,14 @@ public class UserItemHolder extends BaseHolder<User> {
                         .imageView(mAvatar)
                         .build());
         itemView.setOnClickListener(v -> {
-            MediaSelector.INSTANCE.selectPics((FragmentActivity) FuntionsKt.getActivity(context), (paths, uris) -> {
+            /*MediaSelector.INSTANCE.selectPics((FragmentActivity) FuntionsKt.getActivity(context), (paths, uris) -> {
                 ToastsKt.toast(context, "选中了：" + paths.size());
                 return null;
-            });
+            });*/
+            Intent intent = new Intent(context, WebActivity.class);
+            intent.putExtra(WebActivity.EXTR_URL, data.getHomePage());
+            intent.putExtra(WebActivity.EXTR_TITLE, data.getLogin());
+            IntentUtil.startActivity(context, intent);
         });
     }
 

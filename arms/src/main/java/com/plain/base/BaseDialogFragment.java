@@ -89,6 +89,14 @@ public class BaseDialogFragment extends DialogFragment {
         return super.getDialog();
     }
 
+    public static final class DefaultBuilder
+            extends BaseDialogFragment.Builder<DefaultBuilder> {
+
+        public DefaultBuilder(FragmentActivity activity) {
+            super(activity);
+        }
+    }
+
     public static class Builder<B extends BaseDialog.Builder> extends BaseDialog.Builder<B> {
 
         private FragmentActivity mActivity;

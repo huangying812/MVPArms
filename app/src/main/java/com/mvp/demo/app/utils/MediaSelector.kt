@@ -8,15 +8,11 @@ import com.livinglifetechway.k4kotlin.shortToast
 import com.mvp.demo.R
 import com.mvp.demo.app.extensions.*
 import com.plain.http.imageloader.glide.Glide4Engine
-import com.plain.permission.Permission
-import com.plain.permission.PermissionUtil
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.ui.MatisseActivity
 import com.zhihu.matisse.ui.MatisseActivity.EXTRA_RESULT_SELECTION
 import com.zhihu.matisse.ui.MatisseActivity.EXTRA_RESULT_SELECTION_PATH
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 
 object MediaSelector {
@@ -59,29 +55,14 @@ object MediaSelector {
 
     private fun FragmentActivity.checkPermissionAndSelect(callback: (ArrayList<String>?, ArrayList<Uri>?) -> Unit) {
         launchUI {
-            requestMediaPermission().yes {
+            reqMediaPermission().yes {
                 startActivityForResult<MatisseActivity> {
                     val pathList: ArrayList<String>? = it.getStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH)
                     val uriList: ArrayList<Uri>? = it.getParcelableArrayListExtra(EXTRA_RESULT_SELECTION)
                     callback(pathList, uriList)
                 }
             }.otherwise {
-                shortToast("没有权限，无法读取相册")
-            }
-        }
-    }
-
-    private suspend fun FragmentActivity.requestMediaPermission() = suspendCoroutine<Boolean> {
-        val permission = Permission.READ_EXTERNAL_STORAGE
-        requestPermissions(permission) {
-            it.resume(true)
-        }.setOnDeniedCallback { _ ->
-            if (PermissionUtil.checkSinglePermissionPermanentDenied(this, permission)) {
-                shortToast("不询问，禁止了")
-
-                it.resume(false)
-            } else {
-                it.resume(false)
+                shortToast("没有权限，无法访问相册")
             }
         }
     }
