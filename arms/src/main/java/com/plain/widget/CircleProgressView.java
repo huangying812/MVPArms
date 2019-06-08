@@ -22,7 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import com.base.mvp.R;
+import com.plain.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

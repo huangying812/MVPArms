@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.base.mvp.R;
+import com.plain.R;
 import com.plain.base.BaseDialog;
 import com.plain.base.BaseDialogFragment;
 import com.plain.widget.LoopView;

@@ -14,7 +14,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.base.mvp.R;
+import com.plain.R;
 
 import java.util.List;
 import java.util.concurrent.Executors;

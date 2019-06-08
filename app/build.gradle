@@ -28,6 +28,23 @@ android {
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         buildConfigField "String", "FILE_AUTHORITY", "\"${applicationId}.provider\""
         manifestPlaceholders = [appId: rootProject.ext.android["appId"]]
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                // EventBus Apt 索引类生成位置
+                arguments = [ eventBusIndex : applicationId + '.EventBusIndex' ]
+            }
+        }
+    }
+
+    //APK 签名的那些事：https://www.jianshu.com/p/a1f8e5896aa2
+    signingConfigs {
+        release {
+            keyAlias key_alias
+            keyPassword key_psw
+            storeFile file(store_file)
+            storePassword store_psw
+        }
     }
 
     buildTypes {
@@ -36,6 +53,8 @@ android {
             buildConfigField "boolean", "USE_CANARY", "true"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
         }
 
         release {
@@ -45,6 +64,61 @@ android {
             shrinkResources true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions "default" // 这个名字貌似随便取，也可以有多个，总之一定要有
+    // 友盟多渠道打包
+    productFlavors {
+        kuan {}     // 酷安
+        tencent {}  // 应用宝
+        baidu {}    // 百度
+        xiaomi {}   // 小米
+        huawei {}   // 华为
+        google {}   // 谷歌
+
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }
+
+    // 执行配置
+    applicationVariants.all { variant ->
+
+        // Apk 输出配置
+        variant.outputs.all { output ->
+            def appName = "AndroidProject"
+            if (variant.buildType.name == 'debug') {
+                outputFileName = appName + '_v' + versionName + '_' + variant.buildType.name + '.apk'
+            } else {
+                outputFileName = appName + '_v' + versionName + '_' + new Date().format("yyyyMMdd") + '_' + variant.productFlavors[0].name + '_' + variant.buildType.name + '.apk'
+            }
+        }
+
+        // AndroidManifest 输出配置
+        variant.outputs[0].processManifest.doLast {
+
+            def outputDir = manifestOutputDirectory
+            File directory
+            if (outputDir instanceof File) {
+                directory = outputDir
+            } else {
+                directory = outputDir.get().asFile
+            }
+
+            String manifestFile = directory.toString() + "/AndroidManifest.xml"
+//            def manifestFile = "${manifestOutputDirectory}/AndroidManifest.xml"
+            def updatedContent = new File(manifestFile).getText('UTF-8')
+                    .replaceAll("UMENG_APPKEY_VALUE", "5cb16d93570df399fd0014e2") // 友盟 AppKey
+                    .replaceAll("QQ_APPID_VALUE", "100424468") // QQ AppId
+                    .replaceAll("QQ_APPKEY_VALUE", "c7394704798a158208a74ab60104f0ba") // QQ Key
+                    .replaceAll("WX_APPID_VALUE", "wxdc1e388c3822c80b") // 微信 AppId
+                    .replaceAll("WX_APPKEY_VALUE", "3baf1193c85774b3fd9d18447d76cab0") // 微信 Key
+                    .replaceAll("SN_APPID_VALUE", "3921700954") // 新浪 AppId
+                    .replaceAll("SN_APPKEY_VALUE", "04b48b094faeb16683c32669824ebdad") // 新浪 Key
+            new File(manifestFile).write(updatedContent, 'UTF-8')
         }
     }
 

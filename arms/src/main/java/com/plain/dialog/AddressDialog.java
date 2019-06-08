@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.base.mvp.R;
+import com.plain.R;
 import com.google.android.material.tabs.TabLayout;
 import com.plain.base.BaseDialog;
 import com.plain.base.BaseDialogFragment;

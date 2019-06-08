@@ -18,7 +18,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.base.mvp.R;
+import com.plain.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -27,6 +27,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".mvp.ui.activity.WebActivity"/>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${appId}.provider"

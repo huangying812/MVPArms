@@ -2,7 +2,7 @@ package com.plain.dialog;
 
 import android.app.Dialog;
 
-import com.base.mvp.R;
+import com.plain.R;
 import com.plain.widget.LoopView;
 
 import java.util.ArrayList;

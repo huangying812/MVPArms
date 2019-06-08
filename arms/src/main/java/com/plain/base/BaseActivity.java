@@ -16,22 +16,26 @@
 package com.plain.base;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.InflateException;
+import android.view.View;
 
 import com.plain.base.delegate.IActivity;
-import com.plain.utils.ArmsUtils;
 import com.plain.integration.cache.Cache;
 import com.plain.integration.cache.CacheType;
 import com.plain.integration.lifecycle.ActivityLifecycleable;
 import com.plain.mvp.IPresenter;
-
+import com.plain.utils.ArmsUtils;
+import com.plain.utils.StatusManager;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import javax.inject.Inject;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -114,5 +118,53 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     @Override
     public boolean useFragment() {
         return true;
+    }
+
+    /**
+     * 和 setContentView 对应的方法
+     */
+    public View getContentView() {
+        return getWindow().getDecorView();
+    }
+
+    private final StatusManager mStatusManager = new StatusManager();
+
+    /**
+     * 显示加载中
+     */
+    public void showLoading() {
+        mStatusManager.showLoading(this);
+    }
+
+    /**
+     * 显示加载完成
+     */
+    public void showComplete() {
+        mStatusManager.showComplete();
+    }
+
+    /**
+     * 显示空提示
+     */
+    public void showEmpty() {
+        mStatusManager.showEmpty(getContentView());
+    }
+
+    /**
+     * 显示错误提示
+     */
+    public void showError() {
+        mStatusManager.showError(getContentView());
+    }
+
+    /**
+     * 显示自定义提示
+     */
+    public void showLayout(@DrawableRes int iconId, @StringRes int textId) {
+        mStatusManager.showLayout(getContentView(), iconId, textId);
+    }
+
+    public void showLayout(Drawable drawable, CharSequence hint) {
+        mStatusManager.showLayout(getContentView(), drawable, hint);
     }
 }

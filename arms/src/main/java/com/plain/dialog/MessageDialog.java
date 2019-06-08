@@ -5,7 +5,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.base.mvp.R;
+import com.plain.R;
 import com.plain.base.BaseDialog;
 import com.plain.base.BaseDialogFragment;
 

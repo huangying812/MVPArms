@@ -13,4 +13,26 @@
     <string name="dialog_date_year">年</string>
     <string name="dialog_date_month">月</string>
     <string name="dialog_date_day">日</string>
+
+    <string name="dialog_update_button">升级</string>
+    <string name="dialog_update_download_fail">启动下载失败</string>
+    <string name="dialog_update_permission_hint">必须先要授予权限才能正常下载更新哦</string>
+
+    <string name="dialog_update_status_running">下载中</string>
+    <string name="dialog_update_status_successful">立即安装</string>
+    <string name="dialog_update_status_failed">下载失败</string>
+    <string name="dialog_update_status_paused">暂停中</string>
+    <string name="dialog_update_status_pending">等待下载</string>
+
+    <!-- 提示 -->
+    <string name="hint_layout_no_data">亲，暂无数据</string>
+    <string name="hint_layout_error_request">亲，请求出错了</string>
+    <string name="hint_layout_error_network">亲，没有网络了</string>
+
+    <!-- 分享对话框 -->
+    <string name="dialog_share_platform_wx">微信</string>
+    <string name="dialog_share_platform_wx_pyq">朋友圈</string>
+    <string name="dialog_share_platform_qq">QQ</string>
+    <string name="dialog_share_platform_qq_kj">QQ空间</string>
+
 </resources>
