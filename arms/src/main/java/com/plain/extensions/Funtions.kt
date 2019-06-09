@@ -1,4 +1,4 @@
-package com.mvp.demo.app.extensions
+package sl.recharge.call.app.extensions
 
 import android.app.Activity
 import android.content.Context

@@ -20,7 +20,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.InflateException;
 import android.view.View;
+import android.widget.TextView;
 
+import com.plain.R;
 import com.plain.base.delegate.IActivity;
 import com.plain.integration.cache.Cache;
 import com.plain.integration.cache.CacheType;
@@ -93,6 +95,24 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         if (mPresenter != null)
             mPresenter.onDestroy();//释放资源
         this.mPresenter = null;
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        TextView tvTitle = findViewById(R.id.toolbar_title);
+        if (tvTitle != null) {
+            tvTitle.setText(title);
+        }
+    }
+
+    @Override
+    public void setTitle(@StringRes int titleId) {
+        super.setTitle(titleId);
+        TextView tvTitle = findViewById(R.id.toolbar_title);
+        if (tvTitle != null) {
+            tvTitle.setText(titleId);
+        }
     }
 
     /**

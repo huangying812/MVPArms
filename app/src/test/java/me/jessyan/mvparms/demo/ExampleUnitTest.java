@@ -1,4 +1,4 @@
-package com.mvp.demo;
+package sl.recharge.call;
 
 import org.junit.Test;
 

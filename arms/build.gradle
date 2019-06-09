@@ -123,6 +123,12 @@ dependencies {
     //https://github.com/enbandari/ObjectPropertyDelegate
     api "com.bennyhuo.kotlin:opd:1.0-rc-2"
 
+    // 圆形的ImageView：https://github.com/hdodenhof/CircleImageView
+    api 'de.hdodenhof:circleimageview:2.2.0'
+
+    // 支持放大缩放的ImageView：https://github.com/chrisbanes/PhotoView
+    api 'com.github.chrisbanes:PhotoView:2.0.0'
+
     //tools
     compileOnly rootProject.ext.dependencies["javax.annotation"]
     api rootProject.ext.dependencies["dagger2"]

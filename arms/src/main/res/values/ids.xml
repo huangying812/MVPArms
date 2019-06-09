@@ -4,5 +4,6 @@
     <item name="dialog_id_this" type="id" />
 
     <item name="dialog_id_click_listener" type="id" />
+    <item name="toolbar_title" type="id"/>
 
 </resources>

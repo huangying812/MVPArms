@@ -509,5 +509,7 @@
 
     <dimen name="dialog_menu_item_height">46dp</dimen>
     <dimen name="dialog_menu_round_size">12dp</dimen>
+    <!-- 默认按钮的圆角大小 -->
+    <dimen name="button_round_size">5dp</dimen>
 
 </resources>

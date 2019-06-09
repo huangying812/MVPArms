@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="colorPrimary">#3FA862</color>
+    <color name="colorPrimaryDark">#27663C</color>
+    <color name="colorAccent">#FF4081</color>
+
     <color name="dialog_bg">#ffffff</color>
     <color name="dialog_bg_press">#f0f0f0</color>
 
@@ -56,4 +60,15 @@
     <color name="pink">#FFC0CB</color>
     <!-- 橙色 -->
     <color name="orange">#FFA500</color>
+
+    <color name="windowBackground">#F4F4F4</color>
+    <color name="textColor">#333333</color>
+    <color name="textColorHint">#757575</color>
+
+    <!-- 按钮按压时的颜色 -->
+    <color name="colorButtonPressed">#1976d2</color>
+    <!-- 按钮禁用时的颜色 -->
+    <color name="colorButtonDisable">#DDDDDD</color>
+    <!-- 分割线的颜色 -->
+    <color name="colorLine">#ECECEC</color>
 </resources>
